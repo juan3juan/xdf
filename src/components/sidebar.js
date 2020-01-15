@@ -8,7 +8,7 @@ import fakeAuth from "../fakeAuth";
 const Sidebar = () => {
   const handleClick = () => {
     fakeAuth.signout();
-    localStorage.setItem("isAuthenticate", false);
+    sessionStorage.setItem("isAuthenticate", false);
   };
   return (
     <div>

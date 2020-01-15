@@ -4,13 +4,13 @@ import Clients from "./clients";
 import fakeAuth from "../fakeAuth";
 
 const PrivateClients = ({ component: Component, ...rest }) => {
-  console.log(localStorage.getItem("isAuthenticate"));
+  console.log(sessionStorage.getItem("isAuthenticate"));
   return (
     <Route
       {...rest}
       render={props =>
         // fakeAuth.isAuthenticated
-        localStorage.getItem("isAuthenticate") === "true" ? (
+        sessionStorage.getItem("isAuthenticate") === "true" ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />

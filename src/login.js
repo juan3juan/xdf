@@ -95,9 +95,8 @@ function Login(props) {
       if (userData.username === "xdf" && userData.pin === "123") {
         console.log("correct!");
         fakeAuth.authenticate();
-        localStorage.setItem("isAuthenticate", true);
-        console.log(localStorage.getItem("isAuthenticate"));
-
+        sessionStorage.setItem("isAuthenticate", true);
+        console.log(sessionStorage.getItem("isAuthenticate"));
         props.history.push("clients");
         //return <Redirect to="/" />;
       } else {

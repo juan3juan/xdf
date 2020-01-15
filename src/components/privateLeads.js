@@ -10,7 +10,7 @@ const PrivateLeads = ({ component: Component, ...rest }) => {
       {...rest}
       render={props =>
         // fakeAuth.isAuthenticated
-        localStorage.getItem("isAuthenticate") === "true" ? (
+        sessionStorage.getItem("isAuthenticate") === "true" ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />
