@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./components/common/Nav";
+import { Redirect } from "react-router-dom";
+import Sidebar from "./components/sidebar";
+import fakeAuth from "./fakeAuth";
 
-function Login() {
-  const [userData, setUserData] = useState({ pin: "" });
+function Login(props) {
+  const [userData, setUserData] = useState({ username: "", pin: "" });
   const [vcode, setVcode] = useState({
     data: getRandom(109, 48, 4),
     rotate: getRandom(30, -30, 4),
@@ -83,31 +86,37 @@ function Login() {
 
     setVcode({
       ...vcode,
-      vcodeInput: target.value
+      [target.name]: target.value
     });
   }
   function handleSubmit(event) {
     event.preventDefault();
     if (vcode.vcodeInput.toUpperCase() === vcode.vcodeProduce.toUpperCase()) {
-      if (userData.userName === "xdf" && userData.pin === "123") {
-        alert("correct");
+      if (userData.username === "xdf" && userData.pin === "123") {
+        console.log("correct!");
+        fakeAuth.authenticate();
+        localStorage.setItem("isAuthenticate", true);
+        console.log(localStorage.getItem("isAuthenticate"));
+
+        props.history.push("clients");
+        //return <Redirect to="/" />;
       } else {
         alert("user name or password not correct!");
       }
     } else alert("vcode not correct!");
   }
+
   return (
     <div>
-      <Nav />
       <div className="login">
         <form onSubmit={handleSubmit}>
           {/* <label htmlFor="pin">Please input the user name and password</label> */}
           <input
             type="text"
-            id="userName"
+            id="username"
             placeholder="user name"
-            name="userName"
-            value={userData.userName}
+            name="username"
+            value={userData.username}
             onChange={handleChange}
           />
           <input
@@ -163,9 +172,7 @@ function Login() {
               ) : null}
             </div>
           </div>
-
           <button type="submit">Submit</button>
-
           {userData.error && <p className="error">Error: {userData.error}</p>}
         </form>
       </div>

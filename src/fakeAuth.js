@@ -7,6 +7,8 @@ const FakeAuth = {
   signout(cb) {
     this.isAuthenticated = false;
     setTimeout(cb, 100);
+
+    // props.history.push('/clients');
   }
 };
 

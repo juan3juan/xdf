@@ -3,8 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import Clients from "./clients";
 // import Leads from "./leads";
 import { slide as Menu } from "react-burger-menu";
+import fakeAuth from "../fakeAuth";
 
 const Sidebar = () => {
+  const handleClick = () => {
+    fakeAuth.signout();
+    localStorage.setItem("isAuthenticate", false);
+  };
   return (
     <div>
       <Menu>
@@ -13,6 +18,9 @@ const Sidebar = () => {
         </a>
         <a className="menu-item" href="/leads">
           Leads
+        </a>
+        <a className="menu-item" href="/login" onClick={handleClick}>
+          ⇨ Logout
         </a>
       </Menu>
       <style jsx>{`

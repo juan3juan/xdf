@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getRecordsByModule } from "../server/zoho/zohoApi";
+import Sidebar from "./sidebar";
+import Nav from "./common/Nav";
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -19,28 +21,31 @@ const Clients = () => {
     console.log(clients[0].Owner);
   };
   return (
-    <div className="container">
-      <h2 style={{ textAlign: "center", padding: "10px" }}>Clients</h2>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">LAST NAME</th>
-            <th scope="col">SERVICES</th>
-            <th scope="col">PHONE</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clients.map((client, i) => {
-            return (
-              <tr key={i}>
-                <td>{client.Last_Name}</td>
-                <td>{client.Services}</td>
-                <td>{client.Phone}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div>
+      {/* <Sidebar /> */}
+      <div className="container">
+        <h2 style={{ textAlign: "center", padding: "10px" }}>Clients</h2>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">LAST NAME</th>
+              <th scope="col">SERVICES</th>
+              <th scope="col">PHONE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {clients.map((client, i) => {
+              return (
+                <tr key={i}>
+                  <td>{client.Last_Name}</td>
+                  <td>{client.Services}</td>
+                  <td>{client.Phone}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getRecordsByModule } from "../server/zoho/zohoApi";
+import Sidebar from "./sidebar";
 
 const Leads = () => {
   const [clients, setClients] = useState([]);
