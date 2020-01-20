@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const pino = require("express-pino-logger")();
 const ZCRMRestClient = require("zcrmsdk");
 const mysql_util = require("zcrmsdk/lib/js/mysql/mysql_util");
 const initialzie = require("./zoho/Initialize");
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(pino);
 
@@ -39,13 +41,31 @@ xdfRoutes.get("/getRecords/:module", function(req, res) {
   }
 });
 
-function getRecords(module, res) {
+async function getRecords(module, res) {
   let input = {};
   input.module = module;
-  ZCRMRestClient.API.MODULES.get(input).then(function(response) {
-    let data = JSON.parse(response.body).data;
-    res.send(data);
-  });
+  let params = {};
+  params.per_page = 100;
+  params.page = 1;
+  input.params = params;
+  // ZCRMRestClient.API.MODULES.get(input).then(function(response) {
+  //   let data = JSON.parse(response.body).data;
+  //   res.send(data);
+  // });
+  let resData = [];
+  for (let i = 1; i <= 3; i++) {
+    params.page = i;
+    input.params = params;
+    let asyncResp = await ZCRMRestClient.API.MODULES.get(input);
+    let asyncdata = JSON.parse(asyncResp.body).data;
+    resData = resData.concat(asyncdata);
+    // console.log("resData");
+    // console.log(resData);
+  }
+  console.log("resData");
+  console.log(resData);
+
+  res.send(resData);
 }
 
 app.listen(port, () =>

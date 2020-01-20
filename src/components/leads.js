@@ -15,7 +15,7 @@ const Leads = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" id="outer">
       <h2 style={{ textAlign: "center", padding: "10px" }}>Leads</h2>
       <table className="table table-striped">
         <thead>
@@ -37,6 +37,11 @@ const Leads = () => {
           })}
         </tbody>
       </table>
+      <style jsx>{`
+        // #outer {
+        //   width: calc(100% - 300px);
+        // }
+      `}</style>
     </div>
   );
 };
