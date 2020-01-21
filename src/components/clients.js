@@ -35,7 +35,7 @@ const Clients = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = clients.slice(indexOfFirstPost, indexOfLastPost);
-
+  console.log("currentPage: " + currentPage);
   return (
     <div className="container" id="outer">
       <h2 style={{ textAlign: "center", padding: "10px" }}>Clients</h2>

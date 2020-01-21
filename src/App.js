@@ -22,11 +22,7 @@ function App() {
   return (
     <Router>
       <Nav />
-      {/* <Body /> */}
-      {/* <Clients /> */}
-      {/* <body>
-        <Sidebar />
-      </body> */}
+      <Sidebar />
       {/* {isLogin === "true" ? <Sidebar /> : null} */}
       <div className="container">
         <Switch>

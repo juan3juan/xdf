@@ -45,7 +45,7 @@ async function getRecords(module, res) {
   let input = {};
   input.module = module;
   let params = {};
-  params.per_page = 100;
+  params.per_page = 200;
   params.page = 1;
   input.params = params;
   // ZCRMRestClient.API.MODULES.get(input).then(function(response) {
@@ -53,7 +53,7 @@ async function getRecords(module, res) {
   //   res.send(data);
   // });
   let resData = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 2; i++) {
     params.page = i;
     input.params = params;
     let asyncResp = await ZCRMRestClient.API.MODULES.get(input);
