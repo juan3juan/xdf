@@ -62,8 +62,8 @@ async function getRecords(module, res) {
     // console.log("resData");
     // console.log(resData);
   }
-  console.log("resData");
-  console.log(resData);
+  // console.log("resData");
+  // console.log(resData);
 
   res.send(resData);
 }

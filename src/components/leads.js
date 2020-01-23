@@ -2,16 +2,23 @@ import React, { useState, useEffect } from "react";
 import { getRecordsByModule } from "../server/zoho/zohoApi";
 import Sidebar from "./sidebar";
 
-const Leads = () => {
-  const [clients, setClients] = useState([]);
+import { connect } from "react-redux";
+import { loadLeads } from "../redux/actions/leadAction";
+
+const Leads = ({ leads, loadLeads, ...props }) => {
+  //const [clients, setClients] = useState([]);
+  //const [leads, setLeads] = useState([]);
   useEffect(() => {
-    getRecordsByModule("Leads").then(records => {
-      console.log("records");
-      console.log(records[0]);
-      setClients(records);
-      console.log("clients");
-      console.log(clients);
-    });
+    if (leads.length === 0) {
+      loadLeads().catch(error => {
+        alert("Loading leads failed " + error);
+      });
+    }
+    console.log("leads");
+    console.log(leads);
+    // getRecordsByModule("Leads").then(records => {
+    //   setClients(records);
+    // });
   }, []);
 
   return (
@@ -26,12 +33,12 @@ const Leads = () => {
           </tr>
         </thead>
         <tbody>
-          {clients.map((client, i) => {
+          {leads.map((lead, i) => {
             return (
               <tr key={i}>
-                <td>{client.Last_Name}</td>
-                <td>{client.Service_Need}</td>
-                <td>{client.Phone}</td>
+                <td>{lead.Last_Name}</td>
+                <td>{lead.Service_Need}</td>
+                <td>{lead.Phone}</td>
               </tr>
             );
           })}
@@ -46,4 +53,14 @@ const Leads = () => {
   );
 };
 
-export default Leads;
+const mapStateToProps = state => {
+  return {
+    leads: state.leads
+  };
+};
+
+const mapDispatchToProps = {
+  loadLeads
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Leads);

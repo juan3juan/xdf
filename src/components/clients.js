@@ -5,19 +5,23 @@ import Nav from "./common/Nav";
 //import Pagination from "react-js-pagination";
 import Pagination from "./common/Pagination";
 
-const Clients = () => {
-  const [clients, setClients] = useState([]);
+import { connect } from "react-redux";
+import { loadClients } from "../redux/actions/clientActions";
+
+const Clients = ({ clients, loadClients, ...props }) => {
+  //const [clients, setClients] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(100);
 
   useEffect(() => {
-    getRecordsByModule("Contacts").then(records => {
-      console.log("records");
-      console.log(records);
-      setClients(records);
-      console.log("clients");
-      console.log(clients);
-    });
+    if (clients.length === 0) {
+      loadClients().catch(error => {
+        alert("Loading clients failed " + error);
+      });
+    }
+    // getRecordsByModule("Contacts").then(records => {
+    //   setClients(records);
+    // });
   }, []);
 
   const handleClick = e => {
@@ -63,6 +67,7 @@ const Clients = () => {
         postsPerPage={postsPerPage}
         totalPosts={clients.length}
         paginate={handlePageChange}
+        currentPage={currentPage}
       />
       <style jsx>{`
         // #outer {
@@ -73,4 +78,14 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+const mapStateToProps = state => {
+  return {
+    clients: state.clients
+  };
+};
+
+const mapDispatchToProps = {
+  loadClients
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Clients);
