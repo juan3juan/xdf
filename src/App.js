@@ -10,6 +10,7 @@ import Sidebar from "./components/sidebar";
 import PrivateClients from "./components/privateClients";
 import PrivateLeads from "./components/privateLeads";
 import Body from "./components/body";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   let isLogin = sessionStorage.getItem("isAuthenticate");

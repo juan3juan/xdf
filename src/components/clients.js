@@ -18,6 +18,7 @@ const Clients = ({ clients, loadClients, ...props }) => {
       loadClients().catch(error => {
         alert("Loading clients failed " + error);
       });
+      console.log("reload!!!");
     }
     // getRecordsByModule("Contacts").then(records => {
     //   setClients(records);

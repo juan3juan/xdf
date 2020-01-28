@@ -13,6 +13,7 @@ const Leads = ({ leads, loadLeads, ...props }) => {
       loadLeads().catch(error => {
         alert("Loading leads failed " + error);
       });
+      console.log("reload!!!");
     }
     console.log("leads");
     console.log(leads);
