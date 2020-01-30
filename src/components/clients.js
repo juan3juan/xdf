@@ -25,12 +25,6 @@ const Clients = ({ clients, loadClients, ...props }) => {
     // });
   }, []);
 
-  const handleClick = e => {
-    e.preventDefault();
-    console.log("clients1");
-    console.log(clients[0].Owner);
-  };
-
   const handlePageChange = pageNumber => {
     console.log("active page is: " + pageNumber);
     setCurrentPage(pageNumber);

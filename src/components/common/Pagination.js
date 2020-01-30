@@ -6,13 +6,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
+  const active = "pagination justify-content-center " + "";
   return (
     <nav>
-      <ul
-        className="pagination justify-content-center"
-        // style={{ backgroundColor: "lightblue" }}
-        id="pagination"
-      >
+      <ul className="pagination justify-content-center" id="pagination">
         <li className="page-item">
           <a
             onClick={() => paginate(currentPage - 1 >= 1 ? currentPage - 1 : 1)}
@@ -24,7 +21,13 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
         </li>
         {pageNumbers.map(number => (
           <li key={number} className="page-item">
-            <a onClick={() => paginate(number)} href="#!" className="page-link">
+            <a
+              onClick={() => paginate(number)}
+              href="#!"
+              className={
+                currentPage === number ? "page-link active" : "page-link"
+              }
+            >
               {number}
             </a>
           </li>
@@ -49,6 +52,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
         #pagination {
           margin-top: 25px;
         }
+
         #pagination li a {
           cursor: pointer;
           color: black;
@@ -63,6 +67,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
           background-color: #0099ff;
           color: white;
           border: 1px solid #0099ff;
+        }
+
+        .active {
+          background-color: #add8e6;
         }
       `}</style>
     </nav>
